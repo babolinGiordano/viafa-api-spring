@@ -19,7 +19,7 @@ public class DriverDAOImpl implements DriverDAO {
 
 	@Override
 	public List<Driver> findAll() {
-		
+
 		// Get the current hibernate session
 		Session currentSession = entityManager.unwrap(Session.class);
 
@@ -35,19 +35,35 @@ public class DriverDAOImpl implements DriverDAO {
 
 	@Override
 	public Driver findById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		// Get the current hibernate session
+		Session currentSession = entityManager.unwrap(Session.class);
+
+		// Get the employee by id
+		Driver employee = currentSession.get(Driver.class, id);
+
+		// return the result
+		return employee;
 	}
 
 	@Override
-	public void save(Driver employee) {
-		// TODO Auto-generated method stub
+	public void save(Driver driver) {
+		// Get the current hibernate session
+		Session currentSession = entityManager.unwrap(Session.class);
+
+		// Save Employee
+		currentSession.saveOrUpdate(driver);
 
 	}
 
 	@Override
 	public void deleteById(int id) {
-		// TODO Auto-generated method stub
+		// Get the current hibernate session
+		Session currentSession = entityManager.unwrap(Session.class);
+
+		Query query = currentSession.createQuery("delete from Driver where id=:driverId");
+		query.setParameter("driverId", id);
+
+		query.executeUpdate();
 
 	}
 

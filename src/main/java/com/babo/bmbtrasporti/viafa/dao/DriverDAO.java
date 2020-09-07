@@ -10,7 +10,7 @@ public interface DriverDAO {
 
 	public Driver findById(int id);
 
-	public void save(Driver employee);
+	public void save(Driver driver);
 
 	public void deleteById(int id);
 
