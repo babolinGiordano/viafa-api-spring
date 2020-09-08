@@ -9,7 +9,7 @@
 * [Features](#features)
 * [Status](#status)
 * [Inspiration](#inspiration)
-* [Contact](#contact)
+* [License](#license)
 
 ## General info
 Add more general information about project. What the purpose of the project is? Motivation?
@@ -45,5 +45,5 @@ Project is: _in progress_, _finished_, _no longer continue_ and why?
 ## Inspiration
 Add here credits. Project inspired by..., based on...
 
-## Contact
-Created by [@flynerdpl](https://www.flynerd.pl/) - feel free to contact me!
+## License
+Sourcerer is under the MIT license. See the [LICENSE](https://github.com/sourcerer-io/sourcerer-app/blob/develop/LICENSE.md) for more information.e!
