@@ -1,37 +1,49 @@
-## Welcome to ViaFa Pages
+# ViaFa Project
+> Here goes your awesome project description!
 
-You can use the [editor on GitHub](https://github.com/babolinGiordano/viafa-api/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+## Table of contents
+* [General info](#general-info)
+* [Screenshots](#screenshots)
+* [Technologies](#technologies)
+* [Setup](#setup)
+* [Features](#features)
+* [Status](#status)
+* [Inspiration](#inspiration)
+* [Contact](#contact)
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+## General info
+Add more general information about project. What the purpose of the project is? Motivation?
 
-### Markdown
+## Screenshots
+![Example screenshot](./img/screenshot.png)
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+## Technologies
+* Tech 1 - version 1.0
+* Tech 2 - version 2.0
+* Tech 3 - version 3.0
 
-```markdown
-Syntax highlighted code block
+## Setup
+Describe how to install / setup your local environement / add link to demo version.
 
-# Header 1
-## Header 2
-### Header 3
+## Code Examples
+Show examples of usage:
+`put-your-code-here`
 
-- Bulleted
-- List
+## Features
+List of features ready and TODOs for future development
+* Awesome feature 1
+* Awesome feature 2
+* Awesome feature 3
 
-1. Numbered
-2. List
+To-do list:
+* Wow improvement to be done 1
+* Wow improvement to be done 2
 
-**Bold** and _Italic_ and `Code` text
+## Status
+Project is: _in progress_, _finished_, _no longer continue_ and why?
 
-[Link](url) and ![Image](src)
-```
+## Inspiration
+Add here credits. Project inspired by..., based on...
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/babolinGiordano/viafa-api/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+## Contact
+Created by [@flynerdpl](https://www.flynerd.pl/) - feel free to contact me!
