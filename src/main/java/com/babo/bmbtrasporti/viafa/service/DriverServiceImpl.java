@@ -31,14 +31,12 @@ public class DriverServiceImpl implements DriverService {
 	@Transactional
 	public void save(Driver driver) {
 		driverDAO.save(driver);
-
 	}
 
 	@Override
 	@Transactional
 	public void deleteById(int id) {
 		driverDAO.deleteById(id);
-
 	}
 
 }

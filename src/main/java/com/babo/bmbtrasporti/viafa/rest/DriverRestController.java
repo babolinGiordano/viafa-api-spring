@@ -2,6 +2,7 @@ package com.babo.bmbtrasporti.viafa.rest;
 
 import java.util.List;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,60 +16,60 @@ import org.springframework.web.bind.annotation.RestController;
 import com.babo.bmbtrasporti.viafa.entity.Driver;
 import com.babo.bmbtrasporti.viafa.service.DriverService;
 
+@Slf4j
 @RestController
 @RequestMapping("/api")
 public class DriverRestController {
-	
-	@Autowired
-	private DriverService driverService;
-	
-	@GetMapping("/drivers")
-	public List<Driver> findAll() {
-		return driverService.findAll();
-	}
-	
-	@GetMapping("/drivers/{driverId}")
-	public Driver findById(@PathVariable int driverId) {
 
-		Driver driver = driverService.findById(driverId);
+    @Autowired
+    private DriverService driverService;
 
-		if (driver == null) {
-			throw new RuntimeException("Driver id not found" + driverId);
-		}
+    @GetMapping("/drivers")
+    public List<Driver> findAll() {
+        return driverService.findAll();
+    }
 
-		return driver;
-	}
+    @GetMapping("/drivers/{driverId}")
+    public Driver findById(@PathVariable int driverId) {
+        Driver driver = driverService.findById(driverId);
 
-	@PostMapping("/drivers")
-	public Driver addEmployee(@RequestBody Driver driver) {
+        if (driver == null) {
+            throw new RuntimeException("Driver id not found" + driverId);
+        }
 
-		driver.setId(0);
+        return driver;
+    }
 
-		driverService.save(driver);
+    @PostMapping("/drivers")
+    public Driver addEmployee(@RequestBody Driver driver) {
 
-		return driver;
-	}
+        driver.setId(0);
 
-	@PutMapping("/drivers")
-	public Driver updateEmployee(@RequestBody Driver driver) {
-		
-		driverService.save(driver);
+        driverService.save(driver);
 
-		return driver;
-	}
+        return driver;
+    }
 
-	@DeleteMapping("/drivers/{driverId}")
-	public String deleteEmployee(@PathVariable int driverId) {
-		
-		Driver driver = driverService.findById(driverId);
+    @PutMapping("/drivers")
+    public Driver updateEmployee(@RequestBody Driver driver) {
 
-		if (driver == null) {
-			throw new RuntimeException("Driver id not found - " + driverId);
-		}
+        driverService.save(driver);
 
-		driverService.deleteById(driverId);
+        return driver;
+    }
 
-		return "Deleted employee id - " + driverId;
-	}
+    @DeleteMapping("/drivers/{driverId}")
+    public String deleteEmployee(@PathVariable int driverId) {
+
+        Driver driver = driverService.findById(driverId);
+
+        if (driver == null) {
+            throw new RuntimeException("Driver id not found - " + driverId);
+        }
+
+        driverService.deleteById(driverId);
+
+        return "Deleted employee id - " + driverId;
+    }
 
 }
