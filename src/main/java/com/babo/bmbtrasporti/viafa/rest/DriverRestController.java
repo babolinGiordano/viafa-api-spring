@@ -2,6 +2,7 @@ package com.babo.bmbtrasporti.viafa.rest;
 
 import java.util.List;
 
+import com.babo.bmbtrasporti.viafa.exception.ApiNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -34,7 +35,7 @@ public class DriverRestController {
         Driver driver = driverService.findById(driverId);
 
         if (driver == null) {
-            throw new RuntimeException("Driver id not found" + driverId);
+            throw new ApiNotFoundException("Driver id not found" + driverId);
         }
 
         return driver;
@@ -64,7 +65,7 @@ public class DriverRestController {
         Driver driver = driverService.findById(driverId);
 
         if (driver == null) {
-            throw new RuntimeException("Driver id not found - " + driverId);
+            throw new ApiNotFoundException("Driver id not found - " + driverId);
         }
 
         driverService.deleteById(driverId);

@@ -1,6 +1,7 @@
 package com.babo.bmbtrasporti.viafa.rest;
 
 import com.babo.bmbtrasporti.viafa.entity.Truck;
+import com.babo.bmbtrasporti.viafa.exception.ApiNotFoundException;
 import com.babo.bmbtrasporti.viafa.service.TruckService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,7 @@ public class TruckRestController {
         Truck truck = truckService.findById(truckId);
 
         if (truck == null) {
-            throw new RuntimeException("Truck id not found - " + truckId);
+            throw new ApiNotFoundException("Truck id not found - " + truckId);
         }
 
         return truck;
@@ -53,7 +54,7 @@ public class TruckRestController {
         Truck truck = truckService.findById(truckId);
 
         if (truck == null) {
-            throw new RuntimeException("Truck id not found - " + truckId);
+            throw new ApiNotFoundException("Truck id not found - " + truckId);
         }
 
         truckService.deleteById(truckId);

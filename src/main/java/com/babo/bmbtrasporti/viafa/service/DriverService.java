@@ -1,18 +1,17 @@
 package com.babo.bmbtrasporti.viafa.service;
 
-import java.util.List;
-
 import com.babo.bmbtrasporti.viafa.entity.Driver;
 
+import java.util.List;
 
 public interface DriverService {
-	
-	public List<Driver> findAll();
 
-	public Driver findById(int id);
+    List<Driver> findAll();
 
-	public void save(Driver driver);
+    Driver findById(int id);
 
-	public void deleteById(int id);
+    void save(Driver driver);
+
+    void deleteById(int id);
 
 }
