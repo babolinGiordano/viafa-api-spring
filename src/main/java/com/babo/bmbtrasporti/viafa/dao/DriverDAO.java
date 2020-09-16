@@ -1,17 +1,17 @@
 package com.babo.bmbtrasporti.viafa.dao;
 
-import java.util.List;
-
 import com.babo.bmbtrasporti.viafa.entity.Driver;
+
+import java.util.List;
 
 public interface DriverDAO {
 
-	public List<Driver> findAll();
+    List<Driver> findAll();
 
-	public Driver findById(int id);
+    Driver findById(int id);
 
-	public void save(Driver driver);
+    void save(Driver driver);
 
-	public void deleteById(int id);
+    void deleteById(int id);
 
 }
