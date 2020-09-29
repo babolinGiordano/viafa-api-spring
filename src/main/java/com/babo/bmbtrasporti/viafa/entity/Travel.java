@@ -19,17 +19,17 @@ public class Travel {
     @ManyToOne(cascade={ CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH,
             CascadeType.PERSIST })
     @JoinColumn(name = "driver_id")
-    private int driver;
+    private Driver driver;
     // FK to Truck table
     @ManyToOne(cascade={ CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH,
             CascadeType.PERSIST })
     @JoinColumn(name = "truck_id")
-    private int truck;
+    private Truck truck;
     // FK to  Client table
     @ManyToOne(cascade={ CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH,
             CascadeType.PERSIST })
     @JoinColumn(name = "client_id")
-    private int client;
+    private Client client;
 
     @Column(name = "departure")
     private String departure;
