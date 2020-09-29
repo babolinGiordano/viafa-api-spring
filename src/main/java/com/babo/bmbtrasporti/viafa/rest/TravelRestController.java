@@ -1,8 +1,14 @@
 package com.babo.bmbtrasporti.viafa.rest;
 
+import com.babo.bmbtrasporti.viafa.entity.Client;
+import com.babo.bmbtrasporti.viafa.entity.Driver;
 import com.babo.bmbtrasporti.viafa.entity.Travel;
+import com.babo.bmbtrasporti.viafa.entity.Truck;
 import com.babo.bmbtrasporti.viafa.exception.ApiNotFoundException;
+import com.babo.bmbtrasporti.viafa.service.ClientService;
+import com.babo.bmbtrasporti.viafa.service.DriverService;
 import com.babo.bmbtrasporti.viafa.service.TravelService;
+import com.babo.bmbtrasporti.viafa.service.TruckService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -42,11 +48,11 @@ public class TravelRestController {
         return travel;
     }
 
-    @PostMapping("/travels")
+    //FIX: Sara' il modo corretto di passare i parametri o meglio solo il valore senza specificare cosa e'?
+    @PostMapping("/travels/driverId={driverId}&clientId={clientId}&truckId={truckId}")
     public Travel addTravel(@RequestBody Travel travel, @PathVariable int driverId, 
-                            @PathVariable int clientId,  @PathVariable int truckId)) { //Fattibile o meglo altro metodo??
+                            @PathVariable int clientId,  @PathVariable int truckId) {
         
-        //TODO: capire bene cosa passare dal FE per recuperare le tre tabelle collegate a Travel
         Driver driver = driverService.findById(driverId);
         if (driver == null) {
             throw new ApiNotFoundException("Driver id not found - " + driverId);
