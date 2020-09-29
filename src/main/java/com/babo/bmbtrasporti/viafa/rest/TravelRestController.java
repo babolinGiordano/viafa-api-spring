@@ -16,6 +16,9 @@ public class TravelRestController {
 
     @Autowired
     private TravelService travelService;
+    
+    @Autowired
+    private DriverService driverService;
 
     @GetMapping("/travels")
     public List<Travel> findAll() {
@@ -34,9 +37,16 @@ public class TravelRestController {
     }
 
     @PostMapping("/travels")
-    public Travel addTravel(@RequestBody Travel travel) {
+    public Travel addTravel(@RequestBody Travel travel, @PathVariable int driverId)) { //Fattibile o meglo altro metodo??
+        
+        //TODO: capire bene cosa passare dal FE per recuperare le tre tabelle collegate a Travel
+        Driver diver = driverService.findById(driverId);
+        if (diver == null) {
+            throw new ApiNotFoundException("Driver id not found - " + tdriverId);
+        }
 
         travel.setId(0);
+        travel.setDriver(driver);
 
         travelService.save(travel);
 
