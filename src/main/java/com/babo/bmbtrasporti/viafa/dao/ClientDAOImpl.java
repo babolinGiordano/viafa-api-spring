@@ -9,18 +9,21 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import java.util.List;
 
+//TODO: Modificato per usare direttamente le JPA e non + Hibernate
 @Repository
 public class ClientDAOImpl implements ClientDAO {
 
-    @Autowired
     private EntityManager entityManager;
+    
+    @Autowired
+    public EntityManager(EntityManager entityManager) {
+        this.entityManager = entityManager;   
+    }
 
     @Override
     public List<Client> findAll() {
 
-        Session currentSession = entityManager.unwrap(Session.class);
-
-        Query<Client> theQuery = currentSession.createQuery("from Client", Client.class);
+        Query query = entityManager.createQuery("from Client");
 
         List<Client> clients = theQuery.getResultList();
 
@@ -29,25 +32,24 @@ public class ClientDAOImpl implements ClientDAO {
 
     @Override
     public Client findById(int id) {
-        Session currentSession = entityManager.unwrap(Session.class);
 
-        Client clients = currentSession.get(Client.class, id);
+        Client clients = entityManager.find(Client.class, id);
 
         return clients;
     }
 
     @Override
     public void save(Client client) {
-        Session currentSession = entityManager.unwrap(Session.class);
 
-        currentSession.saveOrUpdate(client);
+        Client clients = entityManager.merge(client);
+        
+        client.setId(clients.getId());
     }
 
     @Override
     public void deleteById(int id) {
-        Session currentSession = entityManager.unwrap(Session.class);
 
-        Query query = currentSession.createQuery("delete from Client where id=:clientId");
+        Query query = entityManager.createQuery("delete from Client where id=:clientId");
         query.setParameter("clientId", id);
 
         query.executeUpdate();
