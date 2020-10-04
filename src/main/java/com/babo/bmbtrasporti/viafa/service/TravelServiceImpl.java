@@ -1,40 +1,46 @@
 package com.babo.bmbtrasporti.viafa.service;
 
-import com.babo.bmbtrasporti.viafa.dao.TravelDAO;
+import com.babo.bmbtrasporti.viafa.dao.TravelRepository;
 import com.babo.bmbtrasporti.viafa.entity.Travel;
+import com.babo.bmbtrasporti.viafa.exception.ApiNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class TravelServiceImpl implements TravelService{
 
     @Autowired
-    private TravelDAO travelDAO;
+    private TravelRepository travelRepository;
 
     @Override
-    @Transactional
     public List<Travel> findAll() {
-        return travelDAO.findAll();
+        return travelRepository.findAll();
     }
 
     @Override
-    @Transactional
     public Travel findById(int id) {
-        return travelDAO.findById(id);
+        Optional<Travel> travels = travelRepository.findById(id);
+
+        Travel travel;
+        if(travels.isPresent()){
+            travel = travels.get();
+        } else {
+            throw new ApiNotFoundException("Travel id not found - " + id);
+        }
+
+        return travel;
     }
 
     @Override
-    @Transactional
     public void save(Travel travel) {
-        travelDAO.save(travel);
+        travelRepository.save(travel);
     }
 
     @Override
-    @Transactional
     public void deleteById(int id) {
-        travelDAO.deleteById(id);
+        travelRepository.deleteById(id);
     }
 }

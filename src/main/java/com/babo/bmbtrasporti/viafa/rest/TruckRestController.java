@@ -24,13 +24,8 @@ public class TruckRestController {
 
     @GetMapping("/trucks/{truckId}")
     public Truck findById(@PathVariable int truckId) {
-        Truck truck = truckService.findById(truckId);
 
-        if (truck == null) {
-            throw new ApiNotFoundException("Truck id not found - " + truckId);
-        }
-
-        return truck;
+        return truckService.findById(truckId);
     }
 
     @PostMapping("/trucks")

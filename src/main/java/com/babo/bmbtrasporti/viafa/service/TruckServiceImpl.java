@@ -1,40 +1,46 @@
 package com.babo.bmbtrasporti.viafa.service;
 
-import com.babo.bmbtrasporti.viafa.dao.TruckDAO;
+import com.babo.bmbtrasporti.viafa.dao.TruckRepository;
 import com.babo.bmbtrasporti.viafa.entity.Truck;
+import com.babo.bmbtrasporti.viafa.exception.ApiNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class TruckServiceImpl implements TruckService {
 
     @Autowired
-    private TruckDAO truckDAO;
+    private TruckRepository truckRepository;
 
     @Override
-    @Transactional
     public List<Truck> findAll() {
-        return truckDAO.findAll();
+        return truckRepository.findAll();
     }
 
     @Override
-    @Transactional
     public Truck findById(int id) {
-        return truckDAO.findById(id);
+        Optional<Truck> trucks = truckRepository.findById(id);
+
+        Truck truck;
+        if (trucks.isPresent()) {
+            truck = trucks.get();
+        } else {
+            throw new ApiNotFoundException("Truck id not found - " + id);
+        }
+
+        return truck;
     }
 
     @Override
-    @Transactional
     public void save(Truck truck) {
-        truckDAO.save(truck);
+        truckRepository.save(truck);
     }
 
     @Override
-    @Transactional
     public void deleteById(int id) {
-        truckDAO.deleteById(id);
+        truckRepository.deleteById(id);
     }
 }

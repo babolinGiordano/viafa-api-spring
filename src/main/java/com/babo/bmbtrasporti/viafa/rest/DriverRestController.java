@@ -32,13 +32,8 @@ public class DriverRestController {
 
     @GetMapping("/drivers/{driverId}")
     public Driver findById(@PathVariable int driverId) {
-        Driver driver = driverService.findById(driverId);
 
-        if (driver == null) {
-            throw new ApiNotFoundException("Driver id not found" + driverId);
-        }
-
-        return driver;
+        return driverService.findById(driverId);
     }
 
     @PostMapping("/drivers")

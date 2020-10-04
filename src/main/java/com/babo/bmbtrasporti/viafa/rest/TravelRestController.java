@@ -39,33 +39,26 @@ public class TravelRestController {
 
     @GetMapping("/travels/{travelId}")
     public Travel findById(@PathVariable int travelId) {
-        Travel travel = travelService.findById(travelId);
 
-        if (travel == null) {
-            throw new ApiNotFoundException("Travel id not found - " + travelId);
-        }
-
-        return travel;
+        return travelService.findById(travelId);
     }
 
-    //FIX: Sara' il modo corretto di passare i parametri o meglio solo il valore senza specificare cosa e'?
-    @PostMapping("/travels/driverId={driverId}&clientId={clientId}&truckId={truckId}")
-    public Travel addTravel(@RequestBody Travel travel, @PathVariable int driverId, 
-                            @PathVariable int clientId,  @PathVariable int truckId) {
+    @PostMapping("/travels")
+    public Travel addTravel(@RequestBody Travel travel) {
         
-        Driver driver = driverService.findById(driverId);
+        Driver driver = driverService.findById(travel.getDriver().getId());
         if (driver == null) {
-            throw new ApiNotFoundException("Driver id not found - " + driverId);
+            throw new ApiNotFoundException("Driver id not found - " + travel.getDriver().getId());
         }
         
-        Client client = clientService.findById(clientId);
+        Client client = clientService.findById(travel.getClient().getId());
         if (client == null) {
-            throw new ApiNotFoundException("Client id not found - " + clientId);
+            throw new ApiNotFoundException("Client id not found - " + travel.getClient().getId());
         }
         
-        Truck truck = truckService.findById(truckId);
+        Truck truck = truckService.findById(travel.getTruck().getId());
         if (truck == null) {
-            throw new ApiNotFoundException("Truck id not found - " + truckId);
+            throw new ApiNotFoundException("Truck id not found - " + travel.getTruck().getId());
         }
 
         travel.setId(0);
