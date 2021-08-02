@@ -12,13 +12,11 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addCorsMappings(CorsRegistry corsRegistry) {
-        corsRegistry.addMapping("/**")
-                .allowedOrigins("https://spring-angular-reddit-clone.herokuapp.com")
+        corsRegistry.addMapping("/api/**")
+                .allowedOrigins("https://viafa.herokuapp.com", "http://localhost:4200")
                 .allowedMethods("*")
                 .maxAge(3600L)
-                .allowedHeaders("*")
-                .exposedHeaders("Authorization")
-                .allowCredentials(true);
+                .allowedHeaders("*");
     }
 
     @Override
