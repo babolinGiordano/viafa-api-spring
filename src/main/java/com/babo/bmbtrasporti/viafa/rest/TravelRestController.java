@@ -1,19 +1,20 @@
 package com.babo.bmbtrasporti.viafa.rest;
 
+import com.babo.bmbtrasporti.viafa.dao.ClientRepository;
+import com.babo.bmbtrasporti.viafa.dao.DriverRepository;
+import com.babo.bmbtrasporti.viafa.dao.TruckRepository;
 import com.babo.bmbtrasporti.viafa.entity.Client;
 import com.babo.bmbtrasporti.viafa.entity.Driver;
 import com.babo.bmbtrasporti.viafa.entity.Travel;
 import com.babo.bmbtrasporti.viafa.entity.Truck;
 import com.babo.bmbtrasporti.viafa.exception.ApiNotFoundException;
-import com.babo.bmbtrasporti.viafa.service.ClientService;
-import com.babo.bmbtrasporti.viafa.service.DriverService;
 import com.babo.bmbtrasporti.viafa.service.TravelService;
-import com.babo.bmbtrasporti.viafa.service.TruckService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @RestController
@@ -24,13 +25,13 @@ public class TravelRestController {
     private TravelService travelService;
     
     @Autowired
-    private DriverService driverService;
+    private DriverRepository driverRepository;
     
     @Autowired
-    private ClientService clientService;
+    private ClientRepository clientRepository;
     
     @Autowired
-    private TruckService truckService;
+    private TruckRepository truckRepository;
 
     @GetMapping("/travels")
     public List<Travel> findAll() {
@@ -46,25 +47,25 @@ public class TravelRestController {
     @PostMapping("/travels")
     public Travel addTravel(@RequestBody Travel travel) {
         
-        Driver driver = driverService.findById(travel.getDriver().getId());
-        if (driver == null) {
+        Optional<Driver> driver = driverRepository.findById(travel.getDriver().getId());
+        if(!driver.isPresent()){
             throw new ApiNotFoundException("Driver id not found - " + travel.getDriver().getId());
         }
-        
-        Client client = clientService.findById(travel.getClient().getId());
-        if (client == null) {
+
+        Optional<Client> client = clientRepository.findById(travel.getClient().getId());
+        if (!client.isPresent()) {
             throw new ApiNotFoundException("Client id not found - " + travel.getClient().getId());
         }
-        
-        Truck truck = truckService.findById(travel.getTruck().getId());
-        if (truck == null) {
+
+        Optional<Truck> truck = truckRepository.findById(travel.getTruck().getId());
+        if (!truck.isPresent()) {
             throw new ApiNotFoundException("Truck id not found - " + travel.getTruck().getId());
         }
 
         travel.setId(0);
-        travel.setDriver(driver);
-        travel.setClient(client);
-        travel.setTruck(truck);
+        travel.setDriver(driver.get());
+        travel.setClient(client.get());
+        travel.setTruck(truck.get());
 
         travelService.save(travel);
 
